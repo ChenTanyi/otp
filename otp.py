@@ -23,7 +23,8 @@ class OTPApp(rumps.App):
 
 def get_otp():
     import qr
-    qr_code = qr.scan_qr('qr.png')[0]
+    cwd = os.path.abspath(os.path.dirname(__file__))
+    qr_code = qr.scan_qr(os.path.join(cwd, 'qr.png'))[0]
     url = urllib.parse.urlparse(qr_code.data.decode())
     if url.scheme != 'otpauth' and url.netloc != 'totp':
         logging.exception(
