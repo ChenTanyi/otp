@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import re
-import zbar
+import pyzbar.pyzbar as zbar
 import requests
 from PIL import Image, ImageGrab
 import argparse
@@ -36,8 +36,7 @@ def scan_qr(image):
 
     gray = image.convert('L')
 
-    scanner = zbar.Scanner()
-    return scanner.scan(gray)
+    return zbar.decode(gray)
 
 
 def main():
